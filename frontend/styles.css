@@ -89,31 +89,26 @@ body {
 }
 
 #chatbox {
-
-    flex: 1;
+    height: 450px;
     overflow-y: auto;
-    padding: 20px;
-
+    padding: 15px;
 }
 
 .bot {
-
-    background: white;
-    color: black;
-
-    padding: 12px;
-
-    margin: 10px;
-    border-radius: 18px 18px 18px 0;
-
-    max-width: 75%;
+    background: #ffffff;
+    color: #333;
+    padding: 15px;
+    border-radius: 15px;
+    max-width: 85%;
     width: fit-content;
-
-    box-shadow:
-        0 3px 8px rgba(0, 0, 0, .15);
-
+    min-width: 250px;
+    max-width: 320px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 10px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
-
 .user {
 
     background: #2563eb;

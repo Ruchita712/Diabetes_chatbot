@@ -107,12 +107,19 @@ async function sendMessage() {
 
         const result = await response.json();
 
-        addMessage(
-            patientData.name +
-            ", " + result.reply,
-            "bot"
-        );
+        let message = `${patientData.name},
 
+${result.reply}
+
+Risk Score: ${result.risk}%`;
+
+        if (result.risk >= 70) {
+            message += "\n\nRecommendation:\n• Consult a healthcare professional.\n• Reduce sugar intake.\n• Exercise regularly.";
+        } else {
+            message += "\n\nRecommendation:\n• Maintain a healthy lifestyle.\n• Exercise regularly.";
+        }
+
+        addMessage(message, "bot");
         input.focus();
 
     }

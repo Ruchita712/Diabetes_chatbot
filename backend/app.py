@@ -4,6 +4,9 @@ from predict import predict_diabetes
 
 app = Flask(__name__)
 CORS(app)
+@app.route('/')
+def home():
+    return "Diabetes Chatbot Backend Running Successfully"
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -13,8 +16,9 @@ def chat():
     result = predict_diabetes(data)
 
     return jsonify({
-        "reply": result
-    })
+    "reply": result["prediction"],
+    "risk": result["risk"]
+})
 
 if __name__ == "__main__":
     app.run(debug=True)

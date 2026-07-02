@@ -1,8 +1,13 @@
-import pickle
+import os
+import joblib
 import numpy as np
 
-# Load saved model
-model = pickle.load(open("diabetes_model.pkl", "rb"))
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "diabetes_model.pkl")
+SCALER_PATH = os.path.join(os.path.dirname(__file__), "scaler.pkl")
+
+model = joblib.load(MODEL_PATH)
+scaler = joblib.load(SCALER_PATH)
+
 
 def predict_diabetes(data):
 
@@ -17,9 +22,19 @@ def predict_diabetes(data):
         data["Age"]
     ]])
 
+    # Scale the input
+    features = scaler.transform(features)
+
     prediction = model.predict(features)
+    probability = model.predict_proba(features)[0][1] * 100
 
     if prediction[0] == 1:
-        return "High possibility of diabetes detected."
+        return {
+            "prediction": "High possibility of diabetes detected.",
+            "risk": round(probability, 2)
+        }
     else:
-        return "Low possibility of diabetes detected."
+        return {
+            "prediction": "Low possibility of diabetes detected.",
+            "risk": round(probability, 2)
+        }
